@@ -1,0 +1,30 @@
+---
+- hosts: demo
+  user: ansible
+  connection: ssh
+  become: yes
+  vars:
+   pkgname: httpd
+   ngpkg: apache*
+  tasks:
+   - name: Install httpd server
+     action: yum name='{{pkgname}}' state=installed
+     notify: web restarted
+   - name: Install java 8 on server
+     action: yum name=java state=installed
+     notify: java path check
+   - name: Remove the httpd server
+     action: yum name='{{pkgname}}' state=absent
+   - name: Remove java on server
+     action: yum name=java state=absent
+  handlers:
+   - name: web restarted
+     action: service name='{{pkgname}}' state=started
+   - name: java path check
+     action: which name=java
+     # - name: Remove nginx webserver
+     # action: yum name='{{pkgname}}' state=absent
+   #   - name: Install nginx webserver
+   # action: yum name='{{ngpkg}}' state=installed
+   # - name: Servie start httpd
+   #  action: service name='{{pkgname}}' state=started

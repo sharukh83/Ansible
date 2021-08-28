@@ -1,0 +1,7 @@
+---
+- hosts: all
+  user: ansible
+  connection: ssh
+  become: yes
+  roles:
+          - webserver

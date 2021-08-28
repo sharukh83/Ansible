@@ -1,0 +1,12 @@
+--- # My first testing yaml playbook
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  gather_facts: yes
+ 
+- hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  

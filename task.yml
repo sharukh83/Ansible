@@ -1,0 +1,13 @@
+---
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: Remove httpd on the server
+      action: yum name=httpd state=absent
+    - name: Install httpd on the server
+      action: yum name=httpd state=present
+    - name: Start the httpd server
+      action: service name=httpd state=started
+

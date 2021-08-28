@@ -1,0 +1,14 @@
+---
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks: 
+    - name: remove the packages 
+      command: yum -y install httpd
+     
+    - name: remove the httpd
+      command: service httpd start
+
+  
+
